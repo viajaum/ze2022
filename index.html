@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zé Nunes | Eleições 2022</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif; /* Fonte sem serifa */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh; /* Garante que o corpo ocupe toda a altura */
+    }
+
+    #map {
+      flex-grow: 1; /* Faz o mapa ocupar o máximo de largura disponível */
+      height: 100%; /* Garante que o mapa ocupe 100% da altura */
+    }
+
+    #lista-municipios {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 220px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os elementos no eixo horizontal */
+  justify-content: flex-start;
+}
+
+#lista-municipios .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
+  justify-content: center;
+  margin-bottom: 10px; /* Espaçamento entre a imagem e o título */
+}
+
+#lista-municipios .imagem-logo {
+  width: 140px; /* Ajuste o tamanho da imagem conforme necessário */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-bottom: 10px; /* Espaço entre a imagem e o título */
+}
+
+#lista-municipios h3 {
+  margin: 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+#lista-municipios ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#lista-municipios li {
+  margin: 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#lista-municipios li:hover {
+  background-color: #ff6262; /* Destaque ao passar o mouse */
+}
+ /* Estilo para o rodapé */
+ #rodape {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0px 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1000;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px; /* Tamanho do rodapé ajustado */
+}
+  </style>
+</head>
+<body>
+  <!-- Lista de Municípios -->
+  <div id="lista-municipios">
+    <div class="header">
+      <img src="imagem.png" alt="Logo" class="imagem-logo">
+      <h3>Eleições 2022</h3>
+    </div>
+    <ul id="municipios-list"></ul>
+  </div>
+  
+
+  <!-- Mapa -->
+  <div id="map"></div>
+
+
+  <div id="rodape">
+    <p><a href="mailto:contato.viajaum@gmail.com" style="color: rgb(0, 0, 0); text-decoration: none;">contato.viajaum@gmail.com</a></p>
+  </div>
+
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script src="js/mapa.js"></script>
+</body>
+</html>
