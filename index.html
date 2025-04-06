@@ -20,56 +20,72 @@
 
     #lista-municipios {
   position: fixed;
-  top: 10px;
+  top: 0px;
   right: 10px;
   z-index: 1000;
-  background-color: white;
-  padding: 15px;
-  border-radius: 10px;
-  max-height: 80vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaço entre os blocos */
+  max-height: 90vh;
   width: 220px;
   font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza os elementos no eixo horizontal */
-  justify-content: flex-start;
 }
 
-#lista-municipios .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza o conteúdo */
-  justify-content: center;
-  margin-bottom: 10px; /* Espaçamento entre a imagem e o título */
+/* Bloco da imagem + título */
+.header-box {
+  margin-top: 0;
+  top: 0;
+  right: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#lista-municipios .imagem-logo {
-  width: 140px; /* Ajuste o tamanho da imagem conforme necessário */
-  height: auto; /* Mantém a proporção da imagem */
-  margin-bottom: 10px; /* Espaço entre a imagem e o título */
+/* Imagem */
+.imagem-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 4px;
 }
-
-#lista-municipios h3 {
+.header-box h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 21.8px; /* Aumentado */
   text-align: center;
 }
 
-#lista-municipios ul {
-  list-style-type: none;
-  padding: 0;
+/* Lista de municípios */
+.lista-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  max-height: 70vh;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#lista-municipios li {
+/* Estilização dos itens da lista */
+#municipios-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#municipios-list li {
   margin: 5px 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-#lista-municipios li:hover {
-  background-color: #ff6262; /* Destaque ao passar o mouse */
+#municipios-list li:hover {
+  background-color: #ff6262;
 }
+
+
  /* Estilo para o rodapé */
  #rodape {
   position: fixed;
@@ -82,7 +98,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   z-index: 1000;
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,14 +107,18 @@
   </style>
 </head>
 <body>
-  <!-- Lista de Municípios -->
+
   <div id="lista-municipios">
-    <div class="header">
+    <div class="header-box">
       <img src="imagem.png" alt="Logo" class="imagem-logo">
       <h3>Eleições 2022</h3>
     </div>
-    <ul id="municipios-list"></ul>
+    <div class="lista-box">
+      <ul id="municipios-list"></ul>
+    </div>
   </div>
+  
+  
   
 
   <!-- Mapa -->

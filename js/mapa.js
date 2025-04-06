@@ -40,7 +40,7 @@ arquivos.forEach(arquivo => {
         const lat = parseFloat(linha.Latitude);
         const lon = parseFloat(linha.Longitude);
 
-        if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos)) {
+        if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos) && votos > 0) {
           L.circleMarker([lat, lon], {
             radius: Math.sqrt(votos) * 0.9,
             color: arquivo.cor,
