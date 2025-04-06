@@ -5,6 +5,42 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(mapa);
 
+// Função para ativar a tela cheia
+function entrarTelaCheia() {
+  const elemento = document.documentElement; // A tela inteira
+  if (elemento.requestFullscreen) {
+    elemento.requestFullscreen();
+  } else if (elemento.mozRequestFullScreen) { // Firefox
+    elemento.mozRequestFullScreen();
+  } else if (elemento.webkitRequestFullscreen) { // Chrome, Safari e Opera
+    elemento.webkitRequestFullscreen();
+  } else if (elemento.msRequestFullscreen) { // IE/Edge
+    elemento.msRequestFullscreen();
+  }
+}
+
+// Função para sair da tela cheia
+function sairTelaCheia() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) { // Firefox
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { // Chrome, Safari e Opera
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { // IE/Edge
+    document.msExitFullscreen();
+  }
+}
+
+// Adiciona o evento de click no botão para alternar entre os estados
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+fullscreenBtn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    entrarTelaCheia();
+  } else {
+    sairTelaCheia();
+  }
+});
 // Carrega locais de votação
 const arquivos = [
   { nome: "jaguarao.csv", cor: "#e6194b" },

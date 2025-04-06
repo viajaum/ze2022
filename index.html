@@ -3,110 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <title>Zé Nunes | Eleições 2022</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     body {
-      font-family: 'Arial', sans-serif; /* Fonte sem serifa */
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
-      height: 100vh; /* Garante que o corpo ocupe toda a altura */
+      height: 100vh;
     }
 
     #map {
-      flex-grow: 1; /* Faz o mapa ocupar o máximo de largura disponível */
-      height: 100%; /* Garante que o mapa ocupe 100% da altura */
+      flex-grow: 1;
+      height: 100%;
     }
 
     #lista-municipios {
-  position: fixed;
-  top: 0px;
-  right: 10px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Espaço entre os blocos */
-  max-height: 90vh;
-  width: 220px;
-  font-size: 14px;
-}
+      position: fixed;
+      top: 0px;
+      right: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-height: 90vh;
+      width: 220px;
+      font-size: 14px;
+    }
 
-/* Bloco da imagem + título */
-.header-box {
-  margin-top: 0;
-  top: 0;
-  right: 10px;
-  background-color: white;
-  border-radius: 10px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .header-box {
+      margin-top: 0;
+      background-color: white;
+      border-radius: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-/* Imagem */
-.imagem-logo {
-  width: 140px;
-  height: auto;
-  margin-bottom: 4px;
-}
-.header-box h3 {
-  margin: 0;
-  font-size: 21.8px; /* Aumentado */
-  text-align: center;
-}
+    .imagem-logo {
+      width: 140px;
+      height: auto;
+      margin-bottom: 4px;
+    }
+    .header-box h3 {
+      margin: 0;
+      font-size: 21.8px;
+      text-align: center;
+    }
 
-/* Lista de municípios */
-.lista-box {
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  overflow-y: auto;
-  flex-grow: 1;
-  max-height: 70vh;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .lista-box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+      max-height: 70vh;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-/* Estilização dos itens da lista */
-#municipios-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+    #municipios-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
 
-#municipios-list li {
-  margin: 5px 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    #municipios-list li {
+      margin: 5px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-#municipios-list li:hover {
-  background-color: #ff6262;
-}
+    #municipios-list li:hover {
+      background-color: #ff6262;
+    }
 
+    #rodape {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      color: #000000;
+      padding: 0px 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      z-index: 1000;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+    }
 
- /* Estilo para o rodapé */
- #rodape {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  color: #000000;
-  padding: 0px 20px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  z-index: 1000;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px; /* Tamanho do rodapé ajustado */
-}
+/* Estilo do botão de tela cheia */
+#fullscreen-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px; /* Ajuste o padding para um botão mais quadrado */
+      border-radius: 6px;
+      z-index: 1000;
+      font-size: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    #fullscreen-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Botão de Tela Cheia -->
+  <div id="fullscreen-btn">
+    <i class="fas fa-expand-arrows-alt"></i>
+  </div>
 
   <div id="lista-municipios">
     <div class="header-box">
@@ -117,21 +133,17 @@
       <ul id="municipios-list"></ul>
     </div>
   </div>
-  
-  
-  
 
   <!-- Mapa -->
   <div id="map"></div>
-
 
   <div id="rodape">
     <p><a href="mailto:contato.viajaum@gmail.com" style="color: rgb(0, 0, 0); text-decoration: none;">contato.viajaum@gmail.com</a></p>
   </div>
 
-
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script src="js/mapa.js"></script>
+
 </body>
 </html>
