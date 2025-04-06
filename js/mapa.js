@@ -51,14 +51,14 @@ const arquivos = [
   { nome: "cristal.csv", cor: "#42d4f4"},
   { nome: "domfeliciano.csv", cor: "#f032e6"},
   { nome: "pedroosorio.csv", cor: "#ffe119"},
-  { nome: "pelotas.csv", cor: "#800000"},
+  { nome: "pelotas.csv", cor: "#3e227a"},
   { nome: "portoalegre.csv", cor: "#911eb4"},
   { nome: "santavitoriadopalmar.csv", cor: "#bfef45"},
   { nome: "saojosedonorte.csv", cor: "#469990"},
-  { nome: "saolourencodosul.csv", cor: "#fabebe"},
+  { nome: "saolourencodosul.csv", cor: "#fa1616"},
   { nome: "vacaria.csv", cor: "#008080"},
   { nome: "votosmunicipios2.csv", cor: "#5e5e5e"},
-  { nome: "arroiogrande.csv", cor: "#fca44c"}
+  { nome: "arroiogrande.csv", cor: "#800000"}
 ];
 
 const camadasLocais = L.layerGroup();
@@ -78,7 +78,7 @@ arquivos.forEach(arquivo => {
 
         if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos) && votos > 0) {
           L.circleMarker([lat, lon], {
-            radius: Math.sqrt(votos) * 0.9,
+            radius: Math.sqrt(votos) * 1,
             color: arquivo.cor,
             fillColor: arquivo.cor,
             fillOpacity: 0.6,
@@ -94,7 +94,7 @@ arquivos.forEach(arquivo => {
 
 // Carrega municípios
 const coresPorMunicipio = {
-    "PELOTAS": "#800000",
+    "PELOTAS": "#3e227a",
     "CAMAQUÃ": "#3cb44b",
     "JAGUARÃO": "#e6194b",
     "CACHOEIRA DO SUL": "#4363d8",
@@ -106,9 +106,9 @@ const coresPorMunicipio = {
     "PORTO ALEGRE": "#911eb4",
     "SANTA VITÓRIA DO PALMAR": "#bfef45",
     "SÃO JOSÉ DO NORTE": "#469990",
-    "SÃO LOURENÇO DO SUL": "#fabebe",
+    "SÃO LOURENÇO DO SUL": "#fa1616",
     "VACARIA": "#008080",
-    "ARROIO GRANDE": "#fca44c"
+    "ARROIO GRANDE": "#800000"
 };
 const corPadrao = "#5e5e5e";
 
