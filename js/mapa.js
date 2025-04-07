@@ -89,7 +89,7 @@ arquivos.forEach(arquivo => {
             fillOpacity: 0.6,
             weight: 1
           })
-          .bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>Fonte: ${arquivo.nome}`)
+          .bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>`)
           .addTo(camadasLocais);
         }
       });
