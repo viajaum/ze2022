@@ -58,7 +58,12 @@ const arquivos = [
   { nome: "saolourencodosul.csv", cor: "#fa1616"},
   { nome: "vacaria.csv", cor: "#008080"},
   { nome: "votosmunicipios2.csv", cor: "#5e5e5e"},
-  { nome: "arroiogrande.csv", cor: "#800000"}
+  { nome: "arroiogrande.csv", cor: "#800000"},
+  { nome: "palmaresdosul.csv", cor: "#091e4f"},
+  { nome: "amaralferrador.csv", cor: "#f2ea07"},
+  { nome: "dompedrito.csv", cor: "#26bf91"},
+  { nome: "capaodoleao.csv", cor: "#47151f"}
+
 ];
 
 const camadasLocais = L.layerGroup();
@@ -108,7 +113,11 @@ const coresPorMunicipio = {
     "SÃO JOSÉ DO NORTE": "#469990",
     "SÃO LOURENÇO DO SUL": "#fa1616",
     "VACARIA": "#008080",
-    "ARROIO GRANDE": "#800000"
+    "ARROIO GRANDE": "#800000",
+    "PALMARES DO SUL": "#091e4f",
+    "AMARAL FERRADOR": "#f2ea07",
+    "DOM PEDRITO": "#26bf91",
+    "CAPÃO DO LEÃO": "#47151f"
 };
 const corPadrao = "#5e5e5e";
 
