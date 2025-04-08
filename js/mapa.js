@@ -1,5 +1,5 @@
 // Inicializa o mapa no centro com um nível de zoom
-const mapa = L.map('map').setView([-31.3, -52.0], 7);
+const mapa = L.map('map').setView([-30.7, -52.0], 7);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
@@ -86,7 +86,7 @@ arquivos.forEach(arquivo => {
             radius: Math.sqrt(votos) * 1,
             color: arquivo.cor,
             fillColor: arquivo.cor,
-            fillOpacity: 0.6,
+            fillOpacity: 0.7,
             weight: 1
           })
           .bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>`)
@@ -141,7 +141,7 @@ Papa.parse("data/municipios.csv", {
             radius: Math.sqrt(votos) * 0.5,
             color: cor,
             fillColor: cor,
-            fillOpacity: 0.4,
+            fillOpacity: 0.7,
             weight: 1
           })
           .bindPopup(`<strong>${nome}</strong><br><b>Total:</b> ${votos} votos`)

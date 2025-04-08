@@ -87,16 +87,29 @@
       transform: translateX(-50%);
       background-color: #ffffff;
       color: #000000;
-      padding: 0px 20px;
+      padding: 5px 20px;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       z-index: 1000;
-      font-size: 14px;
+      font-size: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 200px;
     }
+    .coluna {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8; /* reduz o espaçamento vertical */
+}
+
+.coluna p {
+  margin: 0;
+  padding: 0;
+}
+
 
 /* Estilo do botão de tela cheia */
 #fullscreen-btn {
@@ -138,7 +151,10 @@
   <div id="map"></div>
 
   <div id="rodape">
-    <p><a href="mailto:contato.viajaum@gmail.com" style="color: rgb(0, 0, 0); text-decoration: none;">contato.viajaum@gmail.com</a></p>
+    <div class="coluna">
+      <p>Feito por Vítor Gomes</p>
+      <p><a href="mailto:contato.viajaum@gmail.com" style="color: rgb(0, 0, 0); text-decoration: none;">contato.viajaum@gmail.com</a></p>
+    </div>
   </div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
