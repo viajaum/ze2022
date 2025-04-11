@@ -1,8 +1,9 @@
 // Inicializa o mapa no centro com um nível de zoom
 const mapa = L.map('map').setView([-30.7, -52.0], 7);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
+L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team',
+  maxZoom: 20
 }).addTo(mapa);
 
 // Função para ativar a tela cheia
