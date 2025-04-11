@@ -62,7 +62,12 @@ const arquivos = [
   { nome: "palmaresdosul.csv", cor: "#091e4f"},
   { nome: "amaralferrador.csv", cor: "#f2ea07"},
   { nome: "dompedrito.csv", cor: "#26bf91"},
-  { nome: "capaodoleao.csv", cor: "#47151f"}
+  { nome: "capaodoleao.csv", cor: "#47151f"},
+  { nome: "canoas.csv", cor: "#13780a"},
+  { nome: "cerrograndedosul.csv", cor: "#150f61"},
+  { nome: "esteio.csv", cor: "#0a4a78"},
+  { nome: "turucu.csv", cor: "#54b807"}
+
 
 ];
 
@@ -117,7 +122,12 @@ const coresPorMunicipio = {
     "PALMARES DO SUL": "#091e4f",
     "AMARAL FERRADOR": "#f2ea07",
     "DOM PEDRITO": "#26bf91",
-    "CAPÃO DO LEÃO": "#47151f"
+    "CAPÃO DO LEÃO": "#47151f",
+    "CANOAS": "#13780a",
+    "CERRO GRANDE DO SUL": "#150f61",
+    "ESTEIO": "#0a4a78",
+    "TURUÇU": "#54b807"
+  
 };
 const corPadrao = "#5e5e5e";
 
