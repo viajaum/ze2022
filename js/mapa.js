@@ -89,15 +89,24 @@ arquivos.forEach(arquivo => {
         const lon = parseFloat(linha.Longitude);
 
         if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos) && votos > 0) {
-          L.circleMarker([lat, lon], {
+          const visual = L.circleMarker([lat, lon], {
             radius: Math.sqrt(votos) * 1,
             color: arquivo.cor,
             fillColor: arquivo.cor,
             fillOpacity: 0.7,
             weight: 1
-          })
-          .bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>`)
-          .addTo(camadasLocais);
+          }).addTo(camadasLocais);
+          
+          const clicavel = L.circle([lat, lon], {
+            radius: 1000, // ajuste o raio conforme a escala do seu mapa
+            color: "#00000000",
+            fillColor: "#00000000",
+            fillOpacity: 0,
+            weight: 0
+          }).addTo(camadasLocais);
+          
+          clicavel.bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>`);
+          
         }
       });
     }
@@ -149,15 +158,25 @@ Papa.parse("data/municipios.csv", {
           const cor = coresPorMunicipio[nome] || corPadrao;
           municipiosData.push({ nome, votos, lat, lon, cor });
 
-          L.circleMarker([lat, lon], {
+          const visivel = L.circleMarker([lat, lon], {
             radius: Math.sqrt(votos) * 0.5,
             color: cor,
             fillColor: cor,
             fillOpacity: 0.7,
             weight: 1
+          }).addTo(camadaMunicipios);
+          
+          // Círculo "invisível" com raio maior só para clique
+          const clicavel = L.circle([lat, lon], {
+            radius: 3000, // em metros — ajuste conforme necessário
+            color: 'transparent',
+            fillColor: 'transparent',
+            fillOpacity: 0,
+            weight: 0
           })
           .bindPopup(`<strong>${nome}</strong><br><b>Total:</b> ${votos} votos`)
           .addTo(camadaMunicipios);
+          
         }
       });
 
