@@ -93,7 +93,9 @@ arquivos.forEach(arquivo => {
             color: arquivo.cor,
             fillColor: arquivo.cor,
             fillOpacity: 0.7,
-            weight: 1
+            weight: 10,     // borda invisível mais grossa
+            opacity: 0,     // invisível mas interativa
+            interactive: true
           }).addTo(camadasLocais);
 
           marcador.bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}`);
