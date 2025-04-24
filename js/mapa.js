@@ -9,14 +9,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 
 // Função para ativar a tela cheia
 function entrarTelaCheia() {
-  const elemento = document.documentElement; // A tela inteira
+  const elemento = document.documentElement;
   if (elemento.requestFullscreen) {
     elemento.requestFullscreen();
-  } else if (elemento.mozRequestFullScreen) { // Firefox
+  } else if (elemento.mozRequestFullScreen) {
     elemento.mozRequestFullScreen();
-  } else if (elemento.webkitRequestFullscreen) { // Chrome, Safari e Opera
+  } else if (elemento.webkitRequestFullscreen) {
     elemento.webkitRequestFullscreen();
-  } else if (elemento.msRequestFullscreen) { // IE/Edge
+  } else if (elemento.msRequestFullscreen) {
     elemento.msRequestFullscreen();
   }
 }
@@ -25,16 +25,16 @@ function entrarTelaCheia() {
 function sairTelaCheia() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) { // Firefox
+  } else if (document.mozCancelFullScreen) {
     document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) { // Chrome, Safari e Opera
+  } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) { // IE/Edge
+  } else if (document.msExitFullscreen) {
     document.msExitFullscreen();
   }
 }
 
-// Adiciona o evento de click no botão para alternar entre os estados
+// Alternar tela cheia ao clicar no botão
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 fullscreenBtn.addEventListener('click', () => {
   if (!document.fullscreenElement) {
@@ -43,7 +43,8 @@ fullscreenBtn.addEventListener('click', () => {
     sairTelaCheia();
   }
 });
-// Carrega locais de votação
+
+// Lista de arquivos CSV e cores
 const arquivos = [
   { nome: "jaguarao.csv", cor: "#e6194b" },
   { nome: "camaqua.csv", cor: "#3cb44b" },
@@ -69,8 +70,6 @@ const arquivos = [
   { nome: "cerrograndedosul.csv", cor: "#150f61"},
   { nome: "esteio.csv", cor: "#0a4a78"},
   { nome: "turucu.csv", cor: "#54b807"}
-
-
 ];
 
 const camadasLocais = L.layerGroup();
@@ -89,114 +88,93 @@ arquivos.forEach(arquivo => {
         const lon = parseFloat(linha.Longitude);
 
         if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos) && votos > 0) {
-          const visual = L.circleMarker([lat, lon], {
-            radius: Math.sqrt(votos) * 1,
+          const marcador = L.circleMarker([lat, lon], {
+            radius: Math.sqrt(votos),
             color: arquivo.cor,
             fillColor: arquivo.cor,
             fillOpacity: 0.7,
             weight: 1
           }).addTo(camadasLocais);
-          
-          const clicavel = L.circle([lat, lon], {
-            radius: 1000, // ajuste o raio conforme a escala do seu mapa
-            color: "#00000000",
-            fillColor: "#00000000",
-            fillOpacity: 0,
-            weight: 0
-          }).addTo(camadasLocais);
-          
-          clicavel.bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}<br>`);
-          
+
+          marcador.bindPopup(`<strong>${linha.Local}</strong><br>Votos: ${votos}`);
         }
       });
     }
   });
 });
 
-// Carrega municípios
+// Cores por município
 const coresPorMunicipio = {
-    "PELOTAS": "#3e227a",
-    "CAMAQUÃ": "#3cb44b",
-    "JAGUARÃO": "#e6194b",
-    "CACHOEIRA DO SUL": "#4363d8",
-    "CANGUÇU": "#f58231",
-    "CHUVISCA": "#9a6324",
-    "CRISTAL": "#42d4f4",
-    "DOM FELICIANO": "#f032e6",
-    "PEDRO OSÓRIO": "#ffe119",
-    "PORTO ALEGRE": "#911eb4",
-    "SANTA VITÓRIA DO PALMAR": "#6dbf2e",
-    "SÃO JOSÉ DO NORTE": "#469990",
-    "SÃO LOURENÇO DO SUL": "#fa1616",
-    "VACARIA": "#008080",
-    "ARROIO GRANDE": "#800000",
-    "PALMARES DO SUL": "#091e4f",
-    "AMARAL FERRADOR": "#f2ea07",
-    "DOM PEDRITO": "#26bf91",
-    "CAPÃO DO LEÃO": "#de12ae",
-    "CANOAS": "#13780a",
-    "CERRO GRANDE DO SUL": "#150f61",
-    "ESTEIO": "#0a4a78",
-    "TURUÇU": "#54b807"
-  
+  "PELOTAS": "#3e227a",
+  "CAMAQUÃ": "#3cb44b",
+  "JAGUARÃO": "#e6194b",
+  "CACHOEIRA DO SUL": "#4363d8",
+  "CANGUÇU": "#f58231",
+  "CHUVISCA": "#9a6324",
+  "CRISTAL": "#42d4f4",
+  "DOM FELICIANO": "#f032e6",
+  "PEDRO OSÓRIO": "#ffe119",
+  "PORTO ALEGRE": "#911eb4",
+  "SANTA VITÓRIA DO PALMAR": "#6dbf2e",
+  "SÃO JOSÉ DO NORTE": "#469990",
+  "SÃO LOURENÇO DO SUL": "#fa1616",
+  "VACARIA": "#008080",
+  "ARROIO GRANDE": "#800000",
+  "PALMARES DO SUL": "#091e4f",
+  "AMARAL FERRADOR": "#f2ea07",
+  "DOM PEDRITO": "#26bf91",
+  "CAPÃO DO LEÃO": "#de12ae",
+  "CANOAS": "#13780a",
+  "CERRO GRANDE DO SUL": "#150f61",
+  "ESTEIO": "#0a4a78",
+  "TURUÇU": "#54b807"
 };
 const corPadrao = "#5e5e5e";
 
+// Carrega CSV de municípios
 Papa.parse("data/municipios.csv", {
-    download: true,
-    header: true,
-    delimiter: ";",
-    complete: function(results) {
-      const municipiosData = [];
-      results.data.forEach(linha => {
-        const votos = parseInt(linha.Votos);
-        const lat = parseFloat(linha.Latitude);
-        const lon = parseFloat(linha.Longitude);
-        const nome = linha.Local;
+  download: true,
+  header: true,
+  delimiter: ";",
+  complete: function(results) {
+    const municipiosData = [];
+    results.data.forEach(linha => {
+      const votos = parseInt(linha.Votos);
+      const lat = parseFloat(linha.Latitude);
+      const lon = parseFloat(linha.Longitude);
+      const nome = linha.Local;
 
-        if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos)) {
-          const cor = coresPorMunicipio[nome] || corPadrao;
-          municipiosData.push({ nome, votos, lat, lon, cor });
+      if (!isNaN(lat) && !isNaN(lon) && !isNaN(votos)) {
+        const cor = coresPorMunicipio[nome] || corPadrao;
+        municipiosData.push({ nome, votos, lat, lon, cor });
 
-          const visivel = L.circleMarker([lat, lon], {
-            radius: Math.sqrt(votos) * 0.5,
-            color: cor,
-            fillColor: cor,
-            fillOpacity: 0.7,
-            weight: 1
-          }).addTo(camadaMunicipios);
-          
-          // Círculo "invisível" com raio maior só para clique
-          const clicavel = L.circle([lat, lon], {
-            radius: 3000, // em metros — ajuste conforme necessário
-            color: 'transparent',
-            fillColor: 'transparent',
-            fillOpacity: 0,
-            weight: 0
-          })
-          .bindPopup(`<strong>${nome}</strong><br><b>Total:</b> ${votos} votos`)
-          .addTo(camadaMunicipios);
-          
-        }
-      });
+        const marcador = L.circleMarker([lat, lon], {
+          radius: Math.sqrt(votos) * 0.5,
+          color: cor,
+          fillColor: cor,
+          fillOpacity: 0.7,
+          weight: 1
+        }).addTo(camadaMunicipios);
 
-      // Ordena os municípios por votos de forma decrescente
-      municipiosData.sort((a, b) => b.votos - a.votos);
+        marcador.bindPopup(`<strong>${nome}</strong><br><b>Total:</b> ${votos} votos`);
+      }
+    });
 
-      // Preenche a lista de municípios com dados do CSV
-      const listaMunicipios = document.getElementById("municipios-list");
-      municipiosData.forEach(municipio => {
-        const li = document.createElement("li");
-        li.textContent = `${municipio.nome} | ${municipio.votos}`;
-        li.onclick = function() {
-          mapa.setView([municipio.lat, municipio.lon], 11); // Zoom ao clicar
-        };
-        listaMunicipios.appendChild(li);
-      });
-    }
+    municipiosData.sort((a, b) => b.votos - a.votos);
+
+    const listaMunicipios = document.getElementById("municipios-list");
+    municipiosData.forEach(municipio => {
+      const li = document.createElement("li");
+      li.textContent = `${municipio.nome} | ${municipio.votos}`;
+      li.onclick = function() {
+        mapa.setView([municipio.lat, municipio.lon], 11);
+      };
+      listaMunicipios.appendChild(li);
+    });
+  }
 });
 
-// Atualiza camadas conforme zoom
+// Atualiza camadas conforme o zoom
 function atualizarCamadas() {
   const zoom = mapa.getZoom();
 
@@ -210,7 +188,4 @@ function atualizarCamadas() {
 }
 
 mapa.on("zoomend", atualizarCamadas);
-
-// Aplica lógica na primeira carga
 atualizarCamadas();
-
